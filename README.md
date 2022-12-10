@@ -1,2 +1,3 @@
 # advent-of-code
-https://adventofcode.com/
+My Solutions to the advent-of-code challenge. 
+Link: https://adventofcode.com/

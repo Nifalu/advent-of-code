@@ -1,58 +1,38 @@
 use std::collections::HashMap;
-
-
-fn check_for_pattern(patterns: &HashMap<&str, u32>, s: &str) -> (bool, u32) {
-    for (num_string, num) in patterns {
-        if s.starts_with(num_string) {
-            return (true, *num);
-        }
-    }
-    return (false, 0);
-}
-
-fn check_for_digit(c: char) -> (bool, u32) {
-    if c.is_ascii_digit() {
-        return (true, c.to_digit(10).unwrap());
-    }
-    return (false, 0);
-}
-
+use aoc_utils_by_nifalu::*;
 
 fn main() {
     let contents = include_str!("./input.txt");
+    let mut only_strings = contents.to_string();
     
-    let mut sum: u32 = 0;
+    let mut sum: i32 = 0;
 
-    let patterns: HashMap<&str, u32> = [
+    let replacements: Vec<(&str, &str)> = vec![
+        ("0", "zero"), ("1", "one"), ("2", "two"), ("3", "three"), ("4", "four"), ("5", "five"), ("6", "six"), ("7", "seven"), ("8", "eight"), ("9", "nine")
+        ];
+    
+    let num_strings: Vec<&str> = vec!["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"];
+
+    let patterns: HashMap<&str, i32> = [
         ("zero", 0), ("one", 1), ("two", 2), ("three", 3), ("four", 4),
         ("five", 5), ("six", 6), ("seven", 7), ("eight", 8), ("nine", 9),
     ].iter().cloned().collect();
 
-    for line in contents.lines() {
+    for (num, num_string) in &replacements {
+        only_strings = only_strings.replace(num, num_string);
+    }
 
-        // Iterate from the start
-        for (idx, c) in line.chars().enumerate() {
 
-            let (is_digit, value) = check_for_digit(c);
-            let (is_num_string, value1) = check_for_pattern(&patterns, &line[idx..]);
+    for line in only_strings.lines() {
+        println!("{}", line);
+        let positions = line.find_positions(&num_strings);
+        
+        if let Some(first_position) = positions.iter().min_by_key(|&(i, _)| i) {
+            sum += patterns.get(&first_position.1.as_str()).unwrap_or(&0) * 10;
+        };
 
-            if is_digit || is_num_string {
-                sum += (value + value1) * 10;
-                break;
-            }
-        }
-
-        // String
-        for (idx, c) in line.chars().rev().enumerate() {
-            let rev_idx = line.len() - idx -1;
-
-            let (is_digit, value) = check_for_digit(c);
-            let (is_num_string, value1) = check_for_pattern(&patterns, &line[rev_idx..]);
-
-            if is_digit || is_num_string {
-                sum += value + value1;
-                break;
-            }
+        if let Some(last_position) = positions.iter().max_by_key(|&(i, _)| i) {
+            sum += patterns.get(&last_position.1.as_str()).unwrap_or(&0);
         }
     }
 

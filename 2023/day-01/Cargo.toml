@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 regex = "1"
+aoc_utils_by_nifalu = "0.1.5"

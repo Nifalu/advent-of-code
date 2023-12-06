@@ -23,11 +23,9 @@ fn main() {
         for map in &maps {
             seed = apply_mapping(seed, map);
         }
-        println!{"{} has distance: {}", s, seed};
         shortest_distance = shortest_distance.min(seed);
-        println!("SHORTEST DISTANCE : {} ", shortest_distance);
     }
-
+    println!("SHORTEST DISTANCE : {} ", shortest_distance);
 }
 
 fn apply_mapping(seed: i64, map: &Vec<i64>) -> i64 {

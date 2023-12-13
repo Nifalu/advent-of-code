@@ -36,28 +36,28 @@ fn main() {
         match dir {
             Directions::NORTH => {
                 if c == '|' || c == '7' || c == 'F' {
-                    println!("Figure out starting direction {:?}", sequences[curr_pos.0 as usize][curr_pos.1 as usize]);
+                    //println!("Figure out starting direction {:?}", sequences[curr_pos.0 as usize][curr_pos.1 as usize]);
                     (curr_pos, curr_dir) = find_next_step(curr_pos.0, curr_pos.1, &dir, &sequences);
                     break;
                 }
             }
             Directions::EAST => {
                 if c == '-' || c == '7' || c == 'J' {
-                    println!("Figure out starting direction {:?}", sequences[curr_pos.0 as usize][curr_pos.1 as usize]);
+                    //println!("Figure out starting direction {:?}", sequences[curr_pos.0 as usize][curr_pos.1 as usize]);
                     (curr_pos, curr_dir) = find_next_step(curr_pos.0, curr_pos.1, &dir, &sequences);
                     break;
                 } 
             }
             Directions::SOUTH => {
                 if c == '|' || c == 'L' || c == 'J' {
-                    println!("Figure out starting direction {:?}", sequences[curr_pos.0 as usize][curr_pos.1 as usize]);
+                    //println!("Figure out starting direction {:?}", sequences[curr_pos.0 as usize][curr_pos.1 as usize]);
                     (curr_pos, curr_dir) = find_next_step(curr_pos.0, curr_pos.1, &dir, &sequences);
                     break;
                 } 
             }
             Directions::WEST => {
                 if c == '-' || c == 'L' || c == 'F' {
-                    println!("Figure out starting direction {:?}", sequences[curr_pos.0 as usize][curr_pos.1 as usize]);
+                    //println!("Figure out starting direction {:?}", sequences[curr_pos.0 as usize][curr_pos.1 as usize]);
                     (curr_pos, curr_dir) = find_next_step(curr_pos.0, curr_pos.1, &dir, &sequences);
                     break;
                 } 
@@ -74,7 +74,7 @@ fn main() {
 
 
 fn find_next_step(x: i32, y: i32, direction: &Directions, sequences: &Vec<Vec<char>>) -> ((i32, i32), Directions) {
-    println!("walking over: {:?} looking {:?}", sequences[x as usize][y as usize], direction);
+    //println!("walking over: {:?} looking {:?}", sequences[x as usize][y as usize], direction);
     let mut new_x = x;
     let mut new_y = y;
     match direction {

@@ -23,6 +23,9 @@ fn main() {
     });
     // println!("{}, {}\n{}, {}", input.len(), input[0].len(), lava_map.len(), lava_map[0].len());
 
+    //forward((109, 13), NORTH);
+    //print_clean_lava();
+    
     let mut max_length: i32 = 0;
     for i in 0..unsafe{LAVA.len()} {
         forward((i as i8, 0), EAST);
@@ -39,6 +42,7 @@ fn main() {
         reset_lava();
     }
     println!("{}", max_length);
+
 }
 
 

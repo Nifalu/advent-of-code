@@ -2,7 +2,7 @@ use std::collections::HashMap;
 
 use regex::Regex;
 fn main() {
-    let contents = include_str!("./input.txt");
+    let contents = include_str!("./lina.txt");
 
     let mut hand_and_bids: Vec<(String, i64)> = Vec::new();
     for line in contents.lines() {
@@ -99,41 +99,27 @@ fn parse_hand(line: String) -> String {
     
     for (_, amount) in &joker_hands {
         if amount == &5 {
-            // print!("Original Hand: {}, Converted Hand: {}, Most common card: {}, ", line, most_common_char.0, joker_hand);
-            // println!("is a Five of a Kind");
             return format!("A{}", line); // Five of a Kind
         }
         if amount == &4 {
-            // print!("Original Hand: {}, Converted Hand: {}, Most common card: {}, ", line, most_common_char.0, joker_hand);
-            // println!("is a Four of a Kind");
             return format!("B{}", line); // Four of a Kind
         }
         if (amount == &2 || amount == &3) && joker_hands.len() == 2 {
-            // print!("Original Hand: {}, Converted Hand: {}, Most common card: {}, ", line, most_common_char.0, joker_hand);
-            // println!("is a Full House");
             return format!("C{}", line); // Full House
         }
         if amount == &3 {
             if !joker_hand.eq(&line) {
-                print!("Original Hand: {}, Converted Hand: {} ", line, joker_hand);
-                println!("is a Three of a Kind");
             }
             return format!("D{}", line); // Three of a Kind
         }
         if amount == &2 && joker_hands.len() == 3 {
             if !joker_hand.eq(&line) {
-                print!("Original Hand: {}, Converted Hand: {}, ", line, joker_hand);
-                println!("is a Two Pair");
             }
             return format!("E{}", line); // Two Pair
         }
         if amount == &2 {
-            // print!("Original Hand: {}, Converted Hand: {}, Most common card: {}, ", line, most_common_char.0, joker_hand);
-            // println!("is a One Pair");
             return format!("F{}", line); // One Pair
         }
     }
-    // print!("Original Hand: {}, Converted Hand: {}, Most common card: {}, ", line, most_common_char.0, joker_hand);
-    // println!("is a High Card");
     return format!("G{}", line); // High card
 }
